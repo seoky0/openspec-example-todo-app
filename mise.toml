@@ -2,3 +2,4 @@
 node="24.13.0"
 pnpm="10.28.2"
 "npm:@fission-ai/openspec"="1.0.2"
+"aqua:supabase/cli"="2.67.1"
