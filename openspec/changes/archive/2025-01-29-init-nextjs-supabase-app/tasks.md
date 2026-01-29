@@ -1,6 +1,6 @@
 ## 1. Next.jsプロジェクト初期化
 
-- [ ] 1.1 Next.jsプロジェクトを初期化する
+- [x] 1.1 Next.jsプロジェクトを初期化する
 
 ```bash
 pnpm create next-app@latest . --typescript --tailwind --biome --app --src-dir --use-pnpm --skip-install
@@ -8,13 +8,13 @@ pnpm create next-app@latest . --typescript --tailwind --biome --app --src-dir --
 
 ※ 既存ファイルがある場合は確認プロンプトが表示される
 
-- [ ] 1.2 依存関係をインストールする
+- [x] 1.2 依存関係をインストールする
 
 ```bash
 pnpm install
 ```
 
-- [ ] 1.3 追加のディレクトリを作成する
+- [x] 1.3 追加のディレクトリを作成する
 
 ```bash
 mkdir -p src/components src/lib src/types
@@ -22,20 +22,20 @@ mkdir -p src/components src/lib src/types
 
 ## 2. Supabaseローカル環境セットアップ
 
-- [ ] 2.1 aquaの設定にsupabase-cliを追加する
+- [x] 2.1 miseでsupabase-cliをインストールする
 
-`aqua.yaml`に以下を追加:
+`.mise.toml`を作成:
 
-```yaml
-packages:
-  - name: supabase/cli@latest
+```toml
+[tools]
+"aqua:supabase/cli" = "v2.72.8"
 ```
 
 ```bash
-aqua install
+mise install
 ```
 
-- [ ] 2.2 Supabaseプロジェクトを初期化する
+- [x] 2.2 Supabaseプロジェクトを初期化する
 
 ```bash
 supabase init
@@ -43,13 +43,13 @@ supabase init
 
 ## 3. Supabaseクライアント設定
 
-- [ ] 3.1 Supabaseパッケージをインストールする
+- [x] 3.1 Supabaseパッケージをインストールする
 
 ```bash
 pnpm add @supabase/supabase-js @supabase/ssr
 ```
 
-- [ ] 3.2 `src/lib/supabase/client.ts`を作成する（ブラウザ用クライアント）
+- [x] 3.2 `src/lib/supabase/client.ts`を作成する（ブラウザ用クライアント）
 
 ```typescript
 import { createBrowserClient } from "@supabase/ssr";
@@ -62,7 +62,7 @@ export function createClient() {
 }
 ```
 
-- [ ] 3.3 `src/lib/supabase/server.ts`を作成する（Server Components用クライアント）
+- [x] 3.3 `src/lib/supabase/server.ts`を作成する（Server Components用クライアント）
 
 ```typescript
 import { createServerClient } from "@supabase/ssr";
@@ -94,7 +94,7 @@ export async function createClient() {
 }
 ```
 
-- [ ] 3.4 `src/lib/supabase/middleware.ts`を作成する（Middleware用ヘルパー）
+- [x] 3.4 `src/lib/supabase/middleware.ts`を作成する（Middleware用ヘルパー）
 
 ```typescript
 import { createServerClient } from "@supabase/ssr";
@@ -135,7 +135,7 @@ export async function updateSession(request: NextRequest) {
 }
 ```
 
-- [ ] 3.5 `src/middleware.ts`を作成する（認証トークンのリフレッシュ用）
+- [x] 3.5 `src/middleware.ts`を作成する（認証トークンのリフレッシュ用）
 
 ```typescript
 import { type NextRequest } from "next/server";
@@ -161,7 +161,7 @@ export const config = {
 
 ## 4. 環境変数設定
 
-- [ ] 4.1 `.env.example`ファイルを作成する
+- [x] 4.1 `.env.example`ファイルを作成する
 
 ```bash
 cat << 'EOF' > .env.example
@@ -172,7 +172,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
 EOF
 ```
 
-- [ ] 4.2 `.gitignore`に`.env.local`が含まれていることを確認する
+- [x] 4.2 `.gitignore`に`.env.local`が含まれていることを確認する
 
 ```bash
 grep -q ".env.local" .gitignore || echo ".env.local" >> .gitignore
@@ -180,7 +180,7 @@ grep -q ".env.local" .gitignore || echo ".env.local" >> .gitignore
 
 ## 5. 動作確認
 
-- [ ] 5.1 Next.js開発サーバーの起動確認
+- [x] 5.1 Next.js開発サーバーの起動確認
 
 ```bash
 pnpm dev
@@ -188,7 +188,7 @@ pnpm dev
 
 → `http://localhost:3000` でアクセス可能であることを確認
 
-- [ ] 5.2 ローカルSupabaseの起動確認
+- [x] 5.2 ローカルSupabaseの起動確認
 
 ```bash
 supabase start
@@ -202,6 +202,7 @@ supabase start
 
 - [Next.js Installation](https://nextjs.org/docs/app/getting-started/installation)
 - [create-next-app CLI Reference](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
+- [mise Aqua Backend](https://mise.jdx.dev/dev-tools/backends/aqua.html)
 - [Supabase CLI Getting Started](https://supabase.com/docs/guides/local-development/cli/getting-started)
 - [Setting up Server-Side Auth for Next.js](https://supabase.com/docs/guides/auth/server-side/nextjs)
 - [Creating a Supabase client for SSR](https://supabase.com/docs/guides/auth/server-side/creating-a-client)
